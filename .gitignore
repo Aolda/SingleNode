@@ -1,0 +1,6 @@
+./chanju/package-lock.json
+./chanju/package.json
+./chanju/Contract
+./chanju/node_modules
+./chanju/go.mod
+./chanju/go.sum

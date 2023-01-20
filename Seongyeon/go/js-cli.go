@@ -7,13 +7,13 @@ import (
 )
 
 func main() {
-	var arr [5]int = [5]int{1, 2, 3, 4, 5}
+	var fileName string = "script.js"
+	var funcName string = "add"
+	var arg1 int = 2
+	var arg2 int = 3
 
-	cmd := exec.Command("node", "script.js")
-	for _, el := range arr {
-		exec.Command(strconv.Itoa(el))
-	}
-
+	cmd := exec.Command("node", fileName, funcName, strconv.Itoa(arg1), strconv.Itoa(arg2))
+	//fmt.Println(cmd)
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		fmt.Println(err)

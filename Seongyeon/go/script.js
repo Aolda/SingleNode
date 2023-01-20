@@ -1,26 +1,10 @@
-const readline = require("readline");
- 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-});
- 
-let input = []
-let sum = 0;
+functionName = process.argv[2];
+parameter = [process.argv[3], process.argv[4]];
 
-rl.on("line", (line) => {
-    if(line == "q") { rl.close(); }
-    input.push(parseInt(line));
-});
- 
-rl.on('close', () => {
-    input.forEach(el => {
-        sum += el;
-    })
-    console.log(sum);
-    process.exit();
-})
+eval(functionName + "(" + parameter[0] + "," + parameter[1] + ")");
 
-function add() {
-    
+function add(a, b) {
+    a = parseInt(a);
+    b = parseInt(b);
+    console.log(a + b);
 }

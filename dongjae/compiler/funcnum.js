@@ -1,5 +1,5 @@
 
-//node funcnum.js RTFN 하면 함수 갯수랑 파라미터 알려줌
+//node funcnum.js RTFN 하면 함수 갯수 알려줌
 const fs = require('fs');
 const esprima = require('esprima'); // 모듈 추가 가능????????????????
 
@@ -8,12 +8,12 @@ function ReadtheFuncNum(){
     const file = fs.readFileSync('./script.js', 'utf-8');
 
     // Use Esprima to parse the file
-    const ast = esprima.parseScript(file);
+   const ast = esprima.parseScript(file);
 
     // Iterate over the functions in the file
     ast.body.forEach(element => {
         if (element.type === 'FunctionDeclaration'){
-            if(element.id.name !== "ReadtheFuncNum" && element.id.name !== "execFn"){
+            if(element.id.name !== "execFn"){
                 console.log(`Function name: ${element.id.name}`);
                 console.log(`Parameters: ${element.params.map(p => p.name).join(', ')}`);    
             } 

@@ -54,6 +54,5 @@ fnName = process.argv[2];
 inputArgs = process.argv[3];
 args = inputArgs.split(',')
 
-
 result = execFn(fnName,context, ...args);
 console.log(result)

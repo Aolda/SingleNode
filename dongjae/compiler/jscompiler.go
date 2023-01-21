@@ -7,22 +7,22 @@ import (
 )
 
 // func main() {
-// 	action := flag.String("action", "", "insert or another")
-// 	fileName := flag.String("fileName", "", "what file")
-// 	functionName := flag.String("functionName", "", "what function")
-// 	args := os.Args[4:]
+//  action := flag.String("action", "", "insert or another")
+//  fileName := flag.String("fileName", "", "what file")
+//  functionName := flag.String("functionName", "", "what function")
+//  args := os.Args[4:]
 
-// 	flag.Parse()
+//  flag.Parse()
 
-// 	if *action == "insert" {
-// 		ExecuteJS(*fileName, *functionName, args)
-// 	} else {
-// 		fmt.Printf("등록ㄴㄴ\n")
-// 	}
+//  if *action == "insert" {
+//      ExecuteJS(*fileName, *functionName, args)
+//  } else {
+//      fmt.Printf("등록ㄴㄴ\n")
+//  }
 // }
 
 func ExecuteJS(fileName string, functionName string, args []string) string {
-	// fmt.Printf("%s\n%s\n%s\n", fileName, functionName, args)
+	fmt.Printf("%s\n%s\n%s\n", fileName, functionName, args)
 	mergedArgs := strings.Join(args, ",")
 
 	cmd := exec.Command("node", fileName, functionName, mergedArgs)

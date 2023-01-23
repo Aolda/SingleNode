@@ -1,4 +1,5 @@
 
+const start = performance.now();
 function add(a,b){
     a = Number(a)
     b = Number(b)
@@ -56,3 +57,6 @@ args = inputArgs.split(',')
 
 result = execFn(fnName,context, ...args);
 console.log(result)
+const end = performance.now();
+const duration = (end - start).toFixed(2);
+console.log(`실행 속도: ${duration}ms`);

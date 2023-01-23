@@ -1,4 +1,5 @@
 
+const start = performance.now();
 //node funcnum.js RTFN 하면 함수 갯수 알려줌
 const fs = require('fs');
 const esprima = require('esprima'); // 모듈 추가 가능????????????????
@@ -34,4 +35,8 @@ inputArgs = process.argv[3];
 args = []
 
 result = execFn(fnName,context,...args);
+
+const end = performance.now();
+const duration = (end - start).toFixed(2);
+console.log(`실행 속도: ${duration}ms`);
 

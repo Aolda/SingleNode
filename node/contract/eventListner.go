@@ -1,11 +1,10 @@
-package main
+package contract
 
 import (
 	"context"
 	"fmt"
 	"log"
 	"math/big"
-	"os"
 	"reflect"
 	"unsafe"
 
@@ -15,9 +14,15 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 
 	compiler "aolda/compiler"
-	"github.com/joho/godotenv"
 )
 
+/*
+*
+
+	@dev true를 반환하면 0이 있는 거임. false면 0이 없는 거임
+
+*
+*/
 func findZeroFromByte(b []byte) (bool, int) {
 	for i := 0; i < len(b); i++ {
 		if b[i] == 0 {
@@ -46,15 +51,15 @@ func ByteToInt(b []byte) int {
 	return int(intFromByte.Uint64())
 }
 
-func main() {
-	err := godotenv.Load(".env")
-	apiKey := os.Getenv("INFURA_API_KEY")
-	client, err := ethclient.Dial("wss://goerli.infura.io/ws/v3/" + apiKey)
+func ListenEvent() {
+	config := LoadENV()
+	fmt.Printf("Listening %s\n", config.CONTRACT_ADDRESS)
+	client, err := ethclient.Dial(config.BLOCKCHAIN_WSS)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	contractAddress := common.HexToAddress("0xb3D008f2b892b9476cDEb75F701ee8Fb1E23AFc0")
+	contractAddress := common.HexToAddress(config.CONTRACT_ADDRESS)
 	query := ethereum.FilterQuery{
 		Addresses: []common.Address{contractAddress},
 	}
@@ -70,7 +75,8 @@ func main() {
 		case err := <-sub.Err():
 			log.Fatal(err)
 		case vLog := <-logs:
-			if vLog.Topics[0] == common.HexToHash("0x8d397347d14d1ad0861879661d8b750cec64835b214eee49d80b6bf6bb5950de") {
+			// fmt.Println(vLog) // pointer to event log
+			if vLog.Topics[0] == common.HexToHash(config.EVENT_SIGNATURE) {
 				fmt.Println("Listen 'callAolda'")
 			}
 			var data []([]byte)
@@ -92,9 +98,9 @@ func main() {
 				arg := BytesToString(data[argsPointer+ptr+2])
 				args = append(args, arg)
 			}
-			res := compiler.ExecuteJS("script.js", fileName, functionName, args)
+			res := compiler.ExecuteJS(fileName, functionName, args)
 			fmt.Println(res)
-			//SetValue(functionName, args, res)
+			SetValue(functionName, args, res)
 		}
 	}
 }

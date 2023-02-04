@@ -3,5 +3,4 @@ function div(a,b){
     b = Number(b);
     return a/b;
 }
-
 module.exports = { div };

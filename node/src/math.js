@@ -23,5 +23,4 @@ function sub(a,b){
     b = Number(b);
     return a-b;
 }
-
 module.exports = { add, mod, div, mul, sub };

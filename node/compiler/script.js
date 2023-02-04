@@ -1,5 +1,5 @@
-function execFn(fileName, funcName , args){
-    fileName = require(`./src/${fileName}`);
+function execFn(fileName, funcName , args) {
+    fileName = require(`../src/${fileName}`);
     exResult = fileName[funcName].apply(this, args);
     return exResult;
 }
@@ -13,6 +13,5 @@ while(process.argv[i] != null) {
     args.push(process.argv[i]);
     i++;
 }
-
 result = execFn(fileName, funcName, args);
 console.log(result);

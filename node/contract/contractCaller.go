@@ -13,7 +13,7 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
 
-	aoldaClient "aolda/contract/aoldaClient" // for demo
+	aoldaClient "aolda_node/contract/aoldaClient" // for demo
 )
 
 type contract struct {

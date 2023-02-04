@@ -13,7 +13,7 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
 
-	compiler "aolda/compiler"
+	compiler "aolda_node/compiler"
 )
 
 /*
@@ -52,6 +52,7 @@ func ByteToInt(b []byte) int {
 }
 
 func ListenEvent() {
+	fmt.Println("::::: Listening Event :::::")
 	config := LoadENV()
 	fmt.Printf("Listening %s\n", config.CONTRACT_ADDRESS)
 	client, err := ethclient.Dial(config.BLOCKCHAIN_WSS)

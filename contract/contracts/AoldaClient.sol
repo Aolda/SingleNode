@@ -2,11 +2,11 @@
 pragma solidity ^0.8.7;
 
 contract AoldaClient {
-  event CallAolda(string fileName, string funtionName, string[] arguments);
+  event CallAolda(string indexed fileHash, string funtionName, string[] arguments);
   mapping(bytes32 => string) private result;
 
-  function callAolda(string memory fileName, string memory funtionName, string[] memory arguments) public {
-    emit CallAolda(fileName,funtionName, arguments);
+  function callAolda(string memory fileHash, string memory funtionName, string[] memory arguments) public {
+    emit CallAolda(fileHash,funtionName, arguments);
   }
 
   function setValue(bytes32 signature, string memory value) public{
@@ -17,8 +17,8 @@ contract AoldaClient {
       return result[signature];
   }
 
-  function makeSignature(string memory fileName, string memory funtionName, string[] memory arguments) public pure returns(bytes32) {
-    string memory concated = string(abi.encodePacked(fileName,funtionName));
+  function makeSignature(string memory fileHash, string memory funtionName, string[] memory arguments) public pure returns(bytes32) {
+    string memory concated = string(abi.encodePacked(fileHash,funtionName));
     for(uint256 i=0;i<arguments.length;i++){
       concated= string(abi.encodePacked(concated,arguments[i]));
     }

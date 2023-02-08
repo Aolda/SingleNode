@@ -16,6 +16,8 @@ import (
 	compiler "aolda/compiler"
 )
 
+//0xB00BB3B8bd12c127073a566C316D583280a4fE05
+
 /**
  @dev true를 반환하면 0이 있는 거임. false면 0이 없는 거임
 **/
@@ -93,8 +95,9 @@ func ListenEvent() {
 				args = append(args, arg)
 			}
 			res := compiler.ExecuteJS("myScript.js", functionName, args)
+			fmt.Println(res)
 
-			SetValue(functionName, args, res)
+			// SetValue(functionName, args, res)
 		}
 	}
 }

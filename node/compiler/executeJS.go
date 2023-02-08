@@ -3,14 +3,12 @@ package compiler
 import (
 	"fmt"
 	"os/exec"
-	"strings"
 )
 
 func ExecuteJS(fileName string, funcName string, args []string) string {
-	mergedArgs := strings.Join(args, " ")
-	fmt.Println(mergedArgs)
-	script := "./compiler/script.js"
-	cmd := exec.Command("node", script, fileName, funcName, ...args)
+	argsForCommand := []string{"./compiler/script.js", fileName, funcName}
+	argsForCommand = append(argsForCommand, args...)
+	cmd := exec.Command("node", argsForCommand...)
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		fmt.Println(err)

@@ -10,6 +10,7 @@ func ExecuteJS(fileName string, funcName string, args []string) string {
 	argsForCommand = append(argsForCommand, args...)
 	cmd := exec.Command("node", argsForCommand...)
 	out, err := cmd.CombinedOutput()
+	fmt.Printf("%s", out)
 	if err != nil {
 		fmt.Println(err)
 	}

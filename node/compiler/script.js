@@ -1,6 +1,6 @@
-function execFn(fileName, funcName , args) {
+async function execFn(fileName, funcName , args) {
     fileName = require(`../src/${fileName}`);
-    exResult = fileName[funcName].apply(this, args);
+    exResult = await fileName[funcName].apply(this, args);
     return exResult;
 }
 fileName = process.argv[2];
@@ -13,5 +13,9 @@ while(process.argv[i] != null) {
     args.push(process.argv[i]);
     i++;
 }
-result = execFn(fileName, funcName, args);
-console.log(result);
+
+async function print() {
+    result = await execFn(fileName, funcName, args);
+    console.log(result);
+}
+print();

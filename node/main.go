@@ -1,7 +1,7 @@
 package main
 
 import (
-	contract "aolda_node/contract"
+	compiler "aolda_node/compiler"
 	database "aolda_node/database"
 	"sync"
 )
@@ -11,7 +11,12 @@ func main() {
 	wg.Add(2)
 	go func() {
 		defer wg.Done()
-		contract.ListenEvent()
+		var a []string
+		a = append(a, "1")
+		a = append(a, "2")
+		compiler.ExecuteJS("add", "add", a)
+
+		// contract.ListenEvent()
 	}()
 
 	go func() {
